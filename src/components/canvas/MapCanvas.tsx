@@ -56,7 +56,7 @@ export function MapCanvas({
 
   useEffect(() => {
     const img = new window.Image()
-    img.src = `/maps/${mapSlug}.svg`
+    img.src = `/maps/${mapSlug}.png`
     img.onload = () => setMapImage(img)
   }, [mapSlug])
 

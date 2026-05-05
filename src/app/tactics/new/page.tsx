@@ -102,7 +102,7 @@ export default function NewTacticPage() {
                 )}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/maps/${map.slug}.svg`} alt={map.name} className="w-full h-full object-cover" />
+                <img src={`/maps/${map.slug}.png`} alt={map.name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <span className="absolute bottom-1 left-0 right-0 text-center text-xs font-bold text-white">{map.name}</span>
               </button>

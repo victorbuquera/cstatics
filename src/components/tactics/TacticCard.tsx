@@ -19,7 +19,7 @@ export function TacticCard({ tactic }: TacticCardProps) {
       <div className="h-32 relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/maps/${mapSlug}.svg`}
+          src={`/maps/${mapSlug}.png`}
           alt={mapName}
           className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"
         />

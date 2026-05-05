@@ -1,8 +1,7 @@
-import Link from 'next/link'
-import { Plus, Crosshair } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Crosshair } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { TacticCard } from '@/components/tactics/TacticCard'
+import { QuickCreate } from '@/components/tactics/QuickCreate'
 import { Tactic, MapRecord } from '@/lib/types'
 
 async function getTactics(): Promise<Tactic[]> {
@@ -34,11 +33,7 @@ export default async function HomePage() {
             <Crosshair className="text-yellow-400" size={24} />
             <span className="text-lg font-bold tracking-tight">CS2 Tactics</span>
           </div>
-          <Link href="/tactics/new">
-            <Button className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold h-9">
-              <Plus size={16} className="mr-1" /> Nova Tática
-            </Button>
-          </Link>
+          <QuickCreate maps={maps} />
         </div>
       </header>
 
@@ -47,12 +42,8 @@ export default async function HomePage() {
           <div className="text-center py-24">
             <Crosshair size={48} className="text-zinc-700 mx-auto mb-4" />
             <h2 className="text-xl font-bold text-zinc-400 mb-2">Nenhuma tática criada ainda</h2>
-            <p className="text-zinc-600 mb-6">Crie sua primeira tática para começar a planejar suas jogadas.</p>
-            <Link href="/tactics/new">
-              <Button className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold">
-                <Plus size={16} className="mr-1" /> Criar primeira tática
-              </Button>
-            </Link>
+            <p className="text-zinc-600 mb-6">Clique em <strong className="text-yellow-400">Criar rápido</strong> para começar.</p>
+            <QuickCreate maps={maps} />
           </div>
         ) : (
           <div className="space-y-10">
@@ -60,7 +51,7 @@ export default async function HomePage() {
               <section key={map.id}>
                 <div className="flex items-center gap-3 mb-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/maps/${map.slug}.svg`} alt={map.name} className="w-10 h-10 rounded object-cover opacity-70" />
+                  <img src={`/maps/${map.slug}.png`} alt={map.name} className="w-10 h-10 rounded object-cover opacity-70" />
                   <h2 className="text-lg font-bold text-zinc-200">{map.name}</h2>
                   <span className="text-sm text-zinc-600">{mapTactics.length} tática{mapTactics.length !== 1 ? 's' : ''}</span>
                 </div>
