@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="#120808"/>
+  <rect x="100" y="100" width="824" height="824" fill="#200d0d" rx="8"/>
+  <!-- A site -->
+  <rect x="120" y="120" width="280" height="280" fill="#2d1515" rx="4"/>
+  <!-- Apartments -->
+  <rect x="120" y="450" width="120" height="300" fill="#251010" rx="4"/>
+  <!-- Mid / Banana -->
+  <rect x="350" y="550" width="320" height="140" fill="#2d1515" rx="4"/>
+  <!-- B site -->
+  <rect x="680" y="650" width="220" height="220" fill="#2d1515" rx="4"/>
+  <!-- CT spawn -->
+  <rect x="680" y="100" width="220" height="180" fill="#0d2010" rx="4"/>
+  <!-- T spawn -->
+  <rect x="120" y="830" width="180" height="100" fill="#2d1010" rx="4"/>
+  <!-- Boiler -->
+  <rect x="500" y="200" width="80" height="80" fill="#3d2020" rx="4"/>
+  <!-- Barrels -->
+  <rect x="730" y="680" width="40" height="40" fill="#4a2020" rx="2"/>
+  <rect x="790" y="670" width="35" height="55" fill="#4a2020" rx="2"/>
+  <!-- Labels -->
+  <text x="260" y="280" font-family="monospace" font-size="32" fill="#c47070" text-anchor="middle" font-weight="bold">A</text>
+  <text x="790" y="780" font-family="monospace" font-size="32" fill="#c47070" text-anchor="middle" font-weight="bold">B</text>
+  <text x="512" y="60" font-family="monospace" font-size="28" fill="#8a5050" text-anchor="middle">INFERNO</text>
+</svg>

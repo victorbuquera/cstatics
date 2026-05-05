@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="#0a0e14"/>
+  <rect x="100" y="100" width="824" height="824" fill="#111620" rx="8"/>
+  <!-- A site -->
+  <rect x="120" y="120" width="280" height="280" fill="#1a2030" rx="4"/>
+  <!-- Mid -->
+  <rect x="380" y="380" width="260" height="180" fill="#1a2030" rx="4"/>
+  <!-- B site -->
+  <rect x="650" y="600" width="250" height="250" fill="#1a2030" rx="4"/>
+  <!-- CT spawn -->
+  <rect x="550" y="120" width="200" height="160" fill="#102018" rx="4"/>
+  <!-- T spawn -->
+  <rect x="120" y="750" width="200" height="150" fill="#201018" rx="4"/>
+  <!-- Apartments -->
+  <rect x="120" y="460" width="140" height="240" fill="#151c28" rx="4"/>
+  <!-- Short A -->
+  <rect x="380" y="200" width="160" height="140" fill="#151c28" rx="4"/>
+  <!-- Boxes -->
+  <rect x="170" y="160" width="50" height="50" fill="#253040" rx="2"/>
+  <rect x="680" y="640" width="45" height="45" fill="#253040" rx="2"/>
+  <rect x="740" y="630" width="30" height="60" fill="#253040" rx="2"/>
+  <!-- Labels -->
+  <text x="260" y="280" font-family="monospace" font-size="32" fill="#7090c4" text-anchor="middle" font-weight="bold">A</text>
+  <text x="775" y="760" font-family="monospace" font-size="32" fill="#7090c4" text-anchor="middle" font-weight="bold">B</text>
+  <text x="512" y="60" font-family="monospace" font-size="28" fill="#506080" text-anchor="middle">MIRAGE</text>
+</svg>

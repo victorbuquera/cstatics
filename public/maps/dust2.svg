@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="#1a1208"/>
+  <rect x="100" y="100" width="824" height="824" fill="#2d2010" rx="8"/>
+  <!-- Long A corridor -->
+  <rect x="120" y="120" width="200" height="80" fill="#4a3520" rx="4"/>
+  <!-- A site -->
+  <rect x="320" y="100" width="220" height="220" fill="#3d2a15" rx="4"/>
+  <!-- Mid -->
+  <rect x="420" y="400" width="180" height="120" fill="#4a3520" rx="4"/>
+  <!-- B site -->
+  <rect x="700" y="680" width="220" height="220" fill="#3d2a15" rx="4"/>
+  <!-- Long B -->
+  <rect x="720" y="120" width="80" height="200" fill="#4a3520" rx="4"/>
+  <!-- CT spawn -->
+  <rect x="600" y="800" width="180" height="120" fill="#2a4a1a" rx="4"/>
+  <!-- T spawn -->
+  <rect x="100" y="800" width="180" height="120" fill="#4a2a1a" rx="4"/>
+  <!-- Boxes and obstacles -->
+  <rect x="350" y="150" width="40" height="40" fill="#5a4030" rx="2"/>
+  <rect x="720" y="720" width="50" height="50" fill="#5a4030" rx="2"/>
+  <rect x="780" y="700" width="30" height="60" fill="#5a4030" rx="2"/>
+  <!-- Labels -->
+  <text x="420" y="230" font-family="monospace" font-size="32" fill="#c4a265" text-anchor="middle" font-weight="bold">A</text>
+  <text x="810" y="800" font-family="monospace" font-size="32" fill="#c4a265" text-anchor="middle" font-weight="bold">B</text>
+  <text x="512" y="60" font-family="monospace" font-size="28" fill="#8a7050" text-anchor="middle">DUST2</text>
+</svg>
