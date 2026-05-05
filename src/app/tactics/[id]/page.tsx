@@ -134,6 +134,9 @@ export default function ViewTacticPage() {
               onElementSelect={() => {}}
               onCursorMove={broadcastCursor}
               stageRef={stageRef}
+              drawColor="#facc15"
+              drawColorSecondary="#ef4444"
+              drawStrokeWidth={4}
             />
           </div>
 

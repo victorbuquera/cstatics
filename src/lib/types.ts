@@ -1,6 +1,6 @@
 export type Team = 'CT' | 'TR'
 export type GrenadeType = 'smoke' | 'flash' | 'molotov' | 'he'
-export type ElementType = 'player' | 'route' | 'grenade' | 'text'
+export type ElementType = 'player' | 'route' | 'grenade' | 'text' | 'draw'
 
 export interface Keyframe {
   step: number
@@ -39,7 +39,13 @@ export interface TextData {
   color: string
 }
 
-export type ElementData = PlayerData | RouteData | GrenadeData | TextData
+export interface DrawData {
+  points: number[]
+  color: string
+  strokeWidth: number
+}
+
+export type ElementData = PlayerData | RouteData | GrenadeData | TextData | DrawData
 
 export interface TacticElement {
   id: string
