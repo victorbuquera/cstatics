@@ -1,7 +1,10 @@
 'use client'
 
-import { Circle, Text, Group } from 'react-konva'
+import { Circle, Path, Text, Group } from 'react-konva'
 import { TacticElement, PlayerData, TEAM_COLORS } from '@/lib/types'
+
+const CT_EMBLEM = 'M 0 -7 L 6 -4 L 6 1 C 6 5 0 8 0 8 C 0 8 -6 5 -6 1 L -6 -4 Z'
+const TR_EMBLEM = 'M -6 -7 L 6 -7 L 6 -4 L 2 -4 L 2 7 L -2 7 L -2 -4 L -6 -4 Z'
 
 interface PlayerShapeProps {
   element: TacticElement
@@ -53,18 +56,28 @@ export function PlayerShape({ element, isSelected, readOnly, animationStep, onCl
         shadowBlur={isSelected ? 12 : 6}
         shadowOpacity={0.7}
       />
+      <Path
+        data={data.team === 'CT' ? CT_EMBLEM : TR_EMBLEM}
+        fill="rgba(255,255,255,0.9)"
+        strokeWidth={0}
+        scaleX={0.85}
+        scaleY={0.85}
+        listening={false}
+      />
       <Text
         text={data.label}
-        fontSize={10}
+        fontSize={8}
         fontStyle="bold"
         fill="#ffffff"
         align="center"
-        verticalAlign="middle"
         width={radius * 2}
-        height={radius * 2}
         offsetX={radius}
-        offsetY={radius}
+        y={radius + 3}
         listening={false}
+        shadowColor="rgba(0,0,0,0.8)"
+        shadowBlur={3}
+        shadowOffsetX={0}
+        shadowOffsetY={1}
       />
     </Group>
   )

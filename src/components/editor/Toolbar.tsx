@@ -70,6 +70,15 @@ const HEIcon = () => (
   </svg>
 )
 
+const WatchIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" width="16" height="16">
+    <circle cx="4" cy="8" r="2" fill="currentColor" stroke="none" opacity="0.7" />
+    <path d="M4 8 L14 4 L14 12 Z" fill="currentColor" opacity="0.35" stroke="none" />
+    <path d="M4 8 L13 6" strokeLinecap="round" />
+    <path d="M4 8 L13 10" strokeLinecap="round" />
+  </svg>
+)
+
 // ── Tool definitions ──────────────────────────────────────────────────────────
 
 const TOOLS: { id: ActiveTool; label: string; shortcut?: string; icon: React.ReactNode; group?: string }[] = [
@@ -83,6 +92,7 @@ const TOOLS: { id: ActiveTool; label: string; shortcut?: string; icon: React.Rea
   { id: 'molotov',   label: 'Molotov',      shortcut: '3', icon: <MolotovIcon />, group: 'grenades' },
   { id: 'he',        label: 'HE',           shortcut: '4', icon: <HEIcon />,      group: 'grenades' },
   { id: 'text',      label: 'Texto',        shortcut: 'T', icon: <Type size={15} /> },
+  { id: 'watch',    label: 'Cone de visão', shortcut: 'W', icon: <WatchIcon />, group: 'players' },
 ]
 
 const TOOL_COLORS: Partial<Record<ActiveTool, string>> = {
@@ -94,6 +104,7 @@ const TOOL_COLORS: Partial<Record<ActiveTool, string>> = {
   'flash':     'text-yellow-300',
   'molotov':   'text-red-400',
   'he':        'text-green-400',
+  'watch':     'text-cyan-400',
 }
 
 interface ToolbarProps {

@@ -4,16 +4,17 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { Stage, Layer, Image as KonvaImage, Rect } from 'react-konva'
 import type Konva from 'konva'
 import type { KonvaEventObject } from 'konva/lib/Node'
-import { TacticElement, TacticPhase, PlayerData, RouteData, GrenadeData, TextData, DrawData, CollaboratorPresence } from '@/lib/types'
+import { TacticElement, TacticPhase, PlayerData, RouteData, GrenadeData, TextData, DrawData, WatchData, CollaboratorPresence } from '@/lib/types'
 import { PlayerShape } from './PlayerShape'
 import { RouteShape } from './RouteShape'
 import { GrenadeShape } from './GrenadeShape'
 import { TextShape } from './TextShape'
 import { DrawShape, DrawPreview } from './DrawShape'
+import { WatchShape } from './WatchShape'
 import { CursorOverlay } from './CursorOverlay'
 import { v4 as uuidv4 } from 'uuid'
 
-export type ActiveTool = 'select' | 'player-ct' | 'player-tr' | 'route' | 'smoke' | 'flash' | 'molotov' | 'he' | 'text' | 'draw'
+export type ActiveTool = 'select' | 'player-ct' | 'player-tr' | 'route' | 'smoke' | 'flash' | 'molotov' | 'he' | 'text' | 'draw' | 'watch'
 
 const CANVAS_SIZE = 700
 const MIN_SCALE = 0.3
@@ -191,6 +192,15 @@ export function MapCanvas({
     if (activeTool === 'route') {
       setRoutePoints(prev => [...prev, pos.x, pos.y])
       setIsDrawingRoute(true)
+      return
+    }
+
+    if (activeTool === 'watch') {
+      onElementAdd({
+        tactic_id: '', phase_id: currentPhaseId, type: 'watch', order_index: elements.length,
+        data: { x: pos.x, y: pos.y, rotation: 0, angle: 50, radius: 90, color: '#3b82f6', opacity: 0.25 } as WatchData,
+      })
+      return
     }
   }, [readOnly, activeTool, elements, currentPhaseId, onElementAdd, onElementSelect, getRelativePos])
 
@@ -264,6 +274,9 @@ export function MapCanvas({
             }
             if (el.type === 'text') {
               return <TextShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} onClick={() => onElementSelect(el.id)} onDragEnd={(x, y) => onElementUpdate(el.id, { ...(el.data as TextData), x, y })} />
+            }
+            if (el.type === 'watch') {
+              return <WatchShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} onClick={() => onElementSelect(el.id)} onDragEnd={(x, y) => onElementUpdate(el.id, { ...(el.data as WatchData), x, y })} />
             }
             return null
           })}

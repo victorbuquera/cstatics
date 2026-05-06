@@ -1,6 +1,7 @@
 export type Team = 'CT' | 'TR'
 export type GrenadeType = 'smoke' | 'flash' | 'molotov' | 'he'
-export type ElementType = 'player' | 'route' | 'grenade' | 'text' | 'draw'
+export type ElementType = 'player' | 'route' | 'grenade' | 'text' | 'draw' | 'watch'
+export type RouteStyle = 'run' | 'walk' | 'fake'
 
 export interface Keyframe {
   step: number
@@ -21,6 +22,7 @@ export interface RouteData {
   points: number[]
   color: string
   dashed: boolean
+  style?: RouteStyle
 }
 
 export interface GrenadeData {
@@ -45,7 +47,17 @@ export interface DrawData {
   strokeWidth: number
 }
 
-export type ElementData = PlayerData | RouteData | GrenadeData | TextData | DrawData
+export interface WatchData {
+  x: number
+  y: number
+  rotation: number
+  angle: number
+  radius: number
+  color: string
+  opacity: number
+}
+
+export type ElementData = PlayerData | RouteData | GrenadeData | TextData | DrawData | WatchData
 
 export interface TacticElement {
   id: string

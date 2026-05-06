@@ -1,13 +1,13 @@
 'use client'
 
-import { Circle, Text, Group, Line } from 'react-konva'
-import { TacticElement, GrenadeData, GRENADE_COLORS } from '@/lib/types'
+import { Circle, Path, Group, Line } from 'react-konva'
+import { TacticElement, GrenadeData, GrenadeType, GRENADE_COLORS } from '@/lib/types'
 
-const GRENADE_ICONS: Record<string, string> = {
-  smoke: 'S',
-  flash: 'F',
-  molotov: 'M',
-  he: 'H',
+const GRENADE_PATHS: Record<GrenadeType, string> = {
+  smoke: 'M 0 5 C -8 5 -10 -2 -5 -4 C -7 -10 -1 -10 0 -6 C 1 -10 7 -10 5 -4 C 10 -2 8 5 0 5 Z',
+  flash: 'M 0 -4.5 A 4.5 4.5 0 1 1 0.001 -4.5 Z M 0 -7 L 0 -11 M 4.9 -4.9 L 7.8 -7.8 M 7 0 L 11 0 M 4.9 4.9 L 7.8 7.8 M 0 7 L 0 11 M -4.9 4.9 L -7.8 7.8 M -7 0 L -11 0 M -4.9 -4.9 L -7.8 -7.8',
+  molotov: 'M 0 -11 C 6 -6 9 1 7 6 C 5 10 -5 10 -7 6 C -9 1 -6 -6 0 -11 Z',
+  he: 'M -1.5 -12 L 1.5 -12 M 0 -12 L 0 -9 M -5.5 -9 A 5.5 7.5 0 1 0 5.5 -9 L 5.5 -1 A 5.5 7.5 0 0 1 -5.5 -1 Z',
 }
 
 interface GrenadeShapeProps {
@@ -52,17 +52,12 @@ export function GrenadeShape({ element, isSelected, readOnly, onClick, onDragEnd
           shadowBlur={isSelected ? 10 : 5}
           shadowOpacity={0.8}
         />
-        <Text
-          text={GRENADE_ICONS[data.grenadeType]}
-          fontSize={11}
-          fontStyle="bold"
-          fill="#ffffff"
-          align="center"
-          verticalAlign="middle"
-          width={radius * 2}
-          height={radius * 2}
-          offsetX={radius}
-          offsetY={radius}
+        <Path
+          data={GRENADE_PATHS[data.grenadeType]}
+          fill="rgba(255,255,255,0.95)"
+          stroke="rgba(255,255,255,0.9)"
+          strokeWidth={1.5}
+          fillRule="evenodd"
           listening={false}
         />
       </Group>

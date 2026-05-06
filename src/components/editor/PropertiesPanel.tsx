@@ -4,7 +4,7 @@ import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { TacticElement, PlayerData, RouteData, GrenadeData, TextData, GrenadeType, GRENADE_COLORS } from '@/lib/types'
+import { TacticElement, PlayerData, RouteData, GrenadeData, TextData, WatchData, GrenadeType, RouteStyle, GRENADE_COLORS } from '@/lib/types'
 
 interface PropertiesPanelProps {
   element: TacticElement | null
@@ -27,7 +27,8 @@ export function PropertiesPanel({ element, onUpdate, onDelete }: PropertiesPanel
         <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
           {element.type === 'player' ? 'Jogador' :
            element.type === 'route' ? 'Rota' :
-           element.type === 'grenade' ? 'Granada' : 'Texto'}
+           element.type === 'grenade' ? 'Granada' :
+           element.type === 'watch' ? 'Cone de Visão' : 'Texto'}
         </span>
         <Button
           size="icon"
@@ -50,6 +51,9 @@ export function PropertiesPanel({ element, onUpdate, onDelete }: PropertiesPanel
       )}
       {element.type === 'text' && (
         <TextProperties element={element} onUpdate={onUpdate} />
+      )}
+      {element.type === 'watch' && (
+        <WatchProperties element={element} onUpdate={onUpdate} />
       )}
     </div>
   )
@@ -84,10 +88,37 @@ function PlayerProperties({ element, onUpdate }: { element: TacticElement; onUpd
   )
 }
 
+const ROUTE_STYLES: { value: RouteStyle; label: string; glyph: string }[] = [
+  { value: 'run',  label: 'Correr', glyph: '——→' },
+  { value: 'walk', label: 'Andar',  glyph: '- -→' },
+  { value: 'fake', label: 'Fake',   glyph: '···→' },
+]
+
 function RouteProperties({ element, onUpdate }: { element: TacticElement; onUpdate: PropertiesPanelProps['onUpdate'] }) {
   const data = element.data as RouteData
+  const currentStyle: RouteStyle = data.style ?? (data.dashed ? 'walk' : 'run')
   return (
     <div className="space-y-3">
+      <div>
+        <Label className="text-xs text-zinc-400">Estilo</Label>
+        <div className="flex gap-1 mt-1">
+          {ROUTE_STYLES.map(opt => (
+            <button
+              key={opt.value}
+              onClick={() => onUpdate(element.id, { ...data, style: opt.value, dashed: opt.value !== 'run' })}
+              className="flex-1 py-1.5 text-xs rounded border transition-all flex flex-col items-center gap-0.5"
+              style={{
+                borderColor: currentStyle === opt.value ? data.color : '#3f3f46',
+                color: currentStyle === opt.value ? data.color : '#a1a1aa',
+                background: currentStyle === opt.value ? `${data.color}20` : 'transparent',
+              }}
+            >
+              <span className="font-mono text-[9px] opacity-70">{opt.glyph}</span>
+              <span>{opt.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
       <div>
         <Label className="text-xs text-zinc-400">Cor</Label>
         <input
@@ -96,16 +127,6 @@ function RouteProperties({ element, onUpdate }: { element: TacticElement; onUpda
           onChange={e => onUpdate(element.id, { ...data, color: e.target.value })}
           className="mt-1 h-8 w-full rounded cursor-pointer bg-zinc-800 border border-zinc-700 p-1"
         />
-      </div>
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          id="dashed"
-          checked={data.dashed}
-          onChange={e => onUpdate(element.id, { ...data, dashed: e.target.checked })}
-          className="accent-yellow-400"
-        />
-        <Label htmlFor="dashed" className="text-xs text-zinc-400 cursor-pointer">Linha tracejada</Label>
       </div>
     </div>
   )
@@ -175,6 +196,55 @@ function TextProperties({ element, onUpdate }: { element: TacticElement; onUpdat
           value={data.color}
           onChange={e => onUpdate(element.id, { ...data, color: e.target.value })}
           className="mt-1 h-8 w-full rounded cursor-pointer bg-zinc-800 border border-zinc-700 p-1"
+        />
+      </div>
+    </div>
+  )
+}
+
+function WatchProperties({ element, onUpdate }: { element: TacticElement; onUpdate: PropertiesPanelProps['onUpdate'] }) {
+  const data = element.data as WatchData
+  return (
+    <div className="space-y-3">
+      <div>
+        <Label className="text-xs text-zinc-400">Direção ({data.rotation}°)</Label>
+        <input
+          type="range" min={0} max={359} value={data.rotation}
+          onChange={e => onUpdate(element.id, { ...data, rotation: Number(e.target.value) })}
+          className="w-full mt-1 accent-cyan-400"
+        />
+      </div>
+      <div>
+        <Label className="text-xs text-zinc-400">Ângulo FOV ({data.angle}°)</Label>
+        <input
+          type="range" min={15} max={120} value={data.angle}
+          onChange={e => onUpdate(element.id, { ...data, angle: Number(e.target.value) })}
+          className="w-full mt-1 accent-cyan-400"
+        />
+      </div>
+      <div>
+        <Label className="text-xs text-zinc-400">Alcance ({data.radius}px)</Label>
+        <input
+          type="range" min={30} max={220} value={data.radius}
+          onChange={e => onUpdate(element.id, { ...data, radius: Number(e.target.value) })}
+          className="w-full mt-1 accent-cyan-400"
+        />
+      </div>
+      <div>
+        <Label className="text-xs text-zinc-400">Cor</Label>
+        <input
+          type="color"
+          value={data.color}
+          onChange={e => onUpdate(element.id, { ...data, color: e.target.value })}
+          className="mt-1 h-8 w-full rounded cursor-pointer bg-zinc-800 border border-zinc-700 p-1"
+        />
+      </div>
+      <div>
+        <Label className="text-xs text-zinc-400">Opacidade ({Math.round(data.opacity * 100)}%)</Label>
+        <input
+          type="range" min={10} max={60} value={Math.round(data.opacity * 100)}
+          onChange={e => onUpdate(element.id, { ...data, opacity: Number(e.target.value) / 100 })}
+          className="w-full mt-1 accent-cyan-400"
         />
       </div>
     </div>

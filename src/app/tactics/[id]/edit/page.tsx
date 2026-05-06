@@ -100,6 +100,7 @@ export default function EditTacticPage() {
         case 't': case 'T': setActiveTool('text'); break
         case 'c': case 'C': if (!e.ctrlKey) setActiveTool('player-ct'); break
         case 'x': case 'X': if (!e.ctrlKey) setActiveTool('player-tr'); break
+        case 'w': case 'W': setActiveTool('watch'); break
         case '1': setActiveTool('smoke'); break
         case '2': setActiveTool('flash'); break
         case '3': setActiveTool('molotov'); break
