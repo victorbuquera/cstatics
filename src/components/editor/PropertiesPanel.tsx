@@ -61,6 +61,7 @@ export function PropertiesPanel({ element, onUpdate, onDelete }: PropertiesPanel
 
 function PlayerProperties({ element, onUpdate }: { element: TacticElement; onUpdate: PropertiesPanelProps['onUpdate'] }) {
   const data = element.data as PlayerData
+  const keyframeCount = data.keyframes?.length ?? 0
   return (
     <div className="space-y-3">
       <div>
@@ -83,6 +84,19 @@ function PlayerProperties({ element, onUpdate }: { element: TacticElement; onUpd
       </div>
       <div className="text-xs text-zinc-500 bg-zinc-800/50 rounded p-2">
         Time: <span className={data.team === 'CT' ? 'text-blue-400 font-bold' : 'text-orange-400 font-bold'}>{data.team}</span>
+      </div>
+      <div className="flex items-center justify-between text-xs bg-zinc-800/50 rounded p-2">
+        <span className="text-zinc-400">
+          {keyframeCount === 0 ? 'Sem keyframes' : `${keyframeCount} keyframe${keyframeCount !== 1 ? 's' : ''}`}
+        </span>
+        {keyframeCount > 0 && (
+          <button
+            onClick={() => onUpdate(element.id, { ...data, keyframes: [] })}
+            className="text-red-400 hover:text-red-300 transition-colors"
+          >
+            Limpar
+          </button>
+        )}
       </div>
     </div>
   )

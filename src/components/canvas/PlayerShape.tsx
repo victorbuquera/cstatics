@@ -42,7 +42,7 @@ export function PlayerShape({ element, isSelected, readOnly, animationStep, onCl
     <Group
       x={x}
       y={y}
-      draggable={!readOnly}
+      draggable={!readOnly || animationStep !== undefined}
       onClick={onClick}
       onTap={onClick}
       onDragEnd={e => onDragEnd(e.target.x(), e.target.y())}

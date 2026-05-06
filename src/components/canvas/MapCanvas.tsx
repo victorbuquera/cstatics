@@ -267,7 +267,15 @@ export function MapCanvas({
               return <RouteShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} onClick={() => onElementSelect(el.id)} />
             }
             if (el.type === 'player') {
-              return <PlayerShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} animationStep={animationStep} onClick={() => onElementSelect(el.id)} onDragEnd={(x, y) => onElementUpdate(el.id, { ...(el.data as PlayerData), x, y })} />
+              return <PlayerShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} animationStep={animationStep} onClick={() => onElementSelect(el.id)} onDragEnd={(x, y) => {
+                const pData = el.data as PlayerData
+                if (animationStep !== undefined) {
+                  const keyframes = [...(pData.keyframes ?? []).filter(k => k.step !== animationStep), { step: animationStep, x, y }]
+                  onElementUpdate(el.id, { ...pData, keyframes })
+                } else {
+                  onElementUpdate(el.id, { ...pData, x, y })
+                }
+              }} />
             }
             if (el.type === 'grenade') {
               return <GrenadeShape key={el.id} element={el} isSelected={isSelected} readOnly={readOnly} onClick={() => onElementSelect(el.id)} onDragEnd={(x, y) => onElementUpdate(el.id, { ...(el.data as GrenadeData), x, y })} />
